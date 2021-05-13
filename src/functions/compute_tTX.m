@@ -1,4 +1,4 @@
-function [tTX] = compute_tTX(tRX,pseudorange,clockBias)
+function [tTX,dt] = compute_tTX(tRX,pseudorange,clockBias)
 %COMPUTE_TTX This function computes the satellite coordinates at
 %transmission time and the associated time of transmission in a ECEF
 %reference frame
@@ -12,3 +12,5 @@ dt = pseudorange/c;
 
 %Compute the time of emission
 tTX = tRX - dt - clockBias;
+
+end

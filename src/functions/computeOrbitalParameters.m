@@ -1,4 +1,4 @@
-function [orbitalParameters] = computeOrbitalParameters(t,navMessage)
+function [orbitalParameters] = computeOrbitalParameters(t,navMessage,debugLevel,fp)
 %COMPUTEORBITAL This function computes the orbital parameters of a single 
 %satellite at the given time t using the ephemeris from the Navigation 
 %Message
@@ -63,8 +63,7 @@ E = M;
 E_ = 0;
 while (abs(E - E_) > prec)
     E_ = E;
-    E = M + ecc * sin(E); %Sanguino
-    %E = E - (E - ecc * sin(E) - M) / (1 - ecc * cos(E));
+    E = M + ecc * sin(E); 
 end
 
 %Compute the true anomaly
@@ -95,7 +94,10 @@ Omega = Omega0 + (OmegaDot - OmegaDot_Earth) * dt - OmegaDot_Earth * toe;
 %Create the output array
 orbitalParameters = [A,n,M,E,phi0,u,r,i,Omega];
 
-
+if debugLevel == 1
+	fprintf(fp,"PRN %2d: ",navMessage(1)); %Move this inside the next function?
+    fprintf(fp,"%+f, %+f, %+f, %+f, %+f, %+f, %+f, %+f, %+f, %+f, %+11.6f, %+f, %+f, %+f, %+10.6f\n",A,n,M0,M,E,phi0,phi,du,u,r0,dr,r,di,i,Omega);
+end
 
 end
 

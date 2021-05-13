@@ -1,4 +1,4 @@
-function [troposphereDelay] = troposphereCorrection(tD,receiverPos,satPos)
+function [troposphereDelay] = troposphereCorrection(tD,receiverPos,satPos,prn,debugLevel,fp)
 %TROPOSPHERECORRECTION Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -38,6 +38,12 @@ Tz_dry = (1 - (beta * H)/T)^(g/(Rd*beta)) * Tz0_dry;
 Tz_wet = (1 - (beta * H)/T)^(((lambda + 1) * g)/(Rd * beta) - 1) * Tz0_wet;
 
 troposphereDelay = (Tz_dry + Tz_wet) * M;
+
+if debugLevel == 1
+        fprintf(fp,"PRN %2d: DoY=%d, Rec_LLH=[%f,%f,%f]\t Rec_ENU=[%f,%f,%f]\t Azimuth=%f, Elevation=%f \n",prn,tD,receiverPos_llh(1),receiverPos_llh(2),receiverPos_llh(3),satPos_enu(1),satPos_enu(2),satPos_enu(3),az,el);
+        fprintf(fp,"        M=%f, P=%f, T=%f, e=%f, beta=%f, lambda=%f \n",M,P,T,e,beta,lambda);
+        fprintf(fp,"        TZ_dry=%f, TZ_wet=%f, TroposphericDelay=%f \n",Tz_dry,Tz_wet,troposphereDelay);
+end
 
 end
 

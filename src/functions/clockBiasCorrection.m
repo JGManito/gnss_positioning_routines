@@ -1,4 +1,4 @@
-function [ dtSV ] = clockBiasCorrection(t,af,ecc,sqrtA,E,toc,TGD)
+function [ dtSV ] = clockBiasCorrection(t,af,ecc,sqrtA,E,toc,TGD,prn,debugLevel,fp)
 %CLOCKBIASCORRECTION This function computes the clock bias of the SV clock
 %   This function implements the clock bias correction described in
 %   IS-GPS-200H, page 92. 
@@ -34,7 +34,9 @@ end
 %Compute the clock bias
 dtSV = af0 + af1 * deltat + af2 * deltat^2 + dtr - TGD;
 
-
+if debugLevel == 1
+        fprintf(fp,"PRN %2d: dtr=%+e, deltat=%+e, TGD=%+e, dtSV=%+e\n",prn,dtr,deltat,TGD,dtSV);
+end
 
 end
 

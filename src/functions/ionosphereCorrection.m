@@ -1,4 +1,4 @@
-function [ionosphereDelay] = ionosphereCorrection(positionEstimate,satPosition,t,alpha,beta)
+function [ionosphereDelay] = ionosphereCorrection(positionEstimate,satPosition,t,alpha,beta,prn,debugLevel,fp)
 %IONOSPHERECORRECTION This function implements the ionospheric correction
 %model as specified in IS-GPS-200K pages 120-122.
 %   Inputs:
@@ -113,6 +113,12 @@ end
 
 %Convert the ionospheric delay from seconds to meters
 ionosphereDelay = T_iono * c;
+
+if debugLevel == 1
+        fprintf(fp,"PRN %2d: A=%f, E=%f, psi=%f, lat_u=%f, lon_u=%f, lat_i=%f, lon_i=%f\n",prn,A,E,psi,lat_u,lon_u,lat_i,lon_i);
+        fprintf(fp,"        lat_m=%f, t_IIP=%f, F=%f, AMP=%f, PER=%f, X=%f \n",lat_m,gpsTime,F,AMP,PER,X);
+        fprintf(fp,"        IonosphericDelay(s)=%e, IonosphericDelay(m)=%f\n",T_iono,ionosphereDelay);
+end
 
 end
 
