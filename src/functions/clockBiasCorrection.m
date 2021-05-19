@@ -35,7 +35,7 @@ end
 dtSV = af0 + af1 * deltat + af2 * deltat^2 + dtr - TGD;
 
 if debugLevel == 1
-        fprintf(fp,"PRN %2d: dtr=%+e, deltat=%+e, TGD=%+e, dtSV=%+e\n",prn,dtr,deltat,TGD,dtSV);
+        fprintf(fp,"PRN %2d: af0=%f, af1=%f, af2=%f, dtr=%+e, deltat=%+e, TGD=%+e, dtSV=%+e\n",prn,af0,af1,af2,dtr,deltat,TGD,dtSV);
 end
 
 end
