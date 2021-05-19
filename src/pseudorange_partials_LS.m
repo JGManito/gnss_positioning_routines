@@ -28,7 +28,7 @@ debugLevel = 1; %Set -1 to disable all output, 0 for results only and 1 for debu
 
 
 %% ---------- Prepare output file ---------- %%
-[fp,errmsg] = fopen('results/pseudorange_partials.txt','w+');
+[fp,errmsg] = fopen('results/pseudorange_partials_15mins.txt','w+');
 
 
 fprintf(fp,"Least-Squares positining using pseudoranges\n\n");
@@ -142,6 +142,10 @@ for i=1:16:size(gps_observations,1)
         
         %Separate output information between blocks
         fprintf(fp,"\n--------------------\n");
+    end
+    
+    if t==900
+        break;
     end
 end
 
