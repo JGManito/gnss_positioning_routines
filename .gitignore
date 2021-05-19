@@ -1,2 +1,5 @@
 *.ini
 *.asv
+results/pseudorange_partials.txt
+src/functions/pseudorange_partials.txt
+src/pseudorange_partials.txt
